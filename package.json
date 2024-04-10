@@ -1,0 +1,19 @@
+{
+  "name": "projectathena",
+  "version": "1.0.0",
+  "description": " This is a long-term project for saving user-generated stories for offline usage",
+  "main": "run.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LaPlazesDemon/ProjectAthena.git"
+  },
+  "author": "LaPlazesDemon",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/LaPlazesDemon/ProjectAthena/issues"
+  },
+  "homepage": "https://github.com/LaPlazesDemon/ProjectAthena#readme"
+}
