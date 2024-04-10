@@ -8,11 +8,11 @@ This document is provided for informational purposes only and does not constitut
 
 ### Terms of Use
 
-1. **Permitted Use**: You are granted a limited license to access and use the work solely for personal or non-commercial purposes. Any other use, including but not limited to reproduction, distribution, modification, or public display, is strictly prohibited unless expressly authorized by the copyright holder.
+1. **Permitted Use**: You are granted a limited license to access and use the work solely for personal or non-commercial purposes. You may also modify the work for non-commercial purposes, provided that proper attribution is given to the copyright holder.
 
-2. **Attribution**: If you use or reference this work in any way, you must provide proper attribution to the copyright holder.
+2. **Attribution**: If you modify or reference this work in any way, you must provide proper attribution to the copyright holder.
 
-3. **No Derivative Works**: You may not alter, transform, or build upon this work without explicit permission from the copyright holder.
+3. **Commercial Use**: Any use of this work for commercial purposes, including but not limited to reproduction, distribution, or public display, is strictly prohibited unless expressly authorized by the copyright holder.
 
 4. **No Warranty**: This work is provided "as is" without any warranty, express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, and non-infringement.
 
