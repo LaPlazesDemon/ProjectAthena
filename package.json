@@ -4,7 +4,7 @@
   "description": " This is a long-term project for saving user-generated stories for offline usage",
   "main": "run.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test-wattpad": "node run \"https://www.wattpad.com/384173986-her-body-girlxgirl-completed-p-r-e-f-a-c-e\" txt"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/LaPlazesDemon/ProjectAthena/issues"
   },
-  "homepage": "https://github.com/LaPlazesDemon/ProjectAthena#readme"
+  "homepage": "https://github.com/LaPlazesDemon/ProjectAthena#readme",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "cheerio": "^1.0.0-rc.12"
+  }
 }
