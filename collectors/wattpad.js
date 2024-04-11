@@ -3,7 +3,7 @@ const collectorRegex = /^(?:https?:\/\/)?(?:www\.)?wattpad\.com\/(?:story\/)?(\d
 
 const cheerio = require('cheerio');
 const axios = require('axios');
-const config = require('../config.json');
+const config = require('../bin/config.json');
 
 ///////////////
 // FUNCTIONS //

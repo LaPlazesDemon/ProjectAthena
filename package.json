@@ -4,7 +4,7 @@
   "description": " This is a long-term project for saving user-generated stories for offline usage",
   "main": "run.js",
   "scripts": {
-    "test-wattpad": "node run \"https://www.wattpad.com/1354496848-season-list-for-a-sprinkle-of-stardust\" txt"
+    "test-wattpad": "node run \"https://www.wattpad.com/1354496848-season-list-for-a-sprinkle-of-stardust\" html"
   },
   "repository": {
     "type": "git",

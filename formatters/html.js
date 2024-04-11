@@ -1,8 +1,8 @@
 const formatterName = "HTML File"
 const formatterId = "html"
 
-const cheerio = require('cheerio');
-const config = require('../config.json');
+const cheerio = require("cheerio");
+const config = require('../bin/config.json');
 const fs = require('fs');
 
 const format = function(storyData) {
@@ -17,7 +17,7 @@ storyData.chapter_html.forEach(chapter => {
 
     output += `
     
-    <h2>${chapter.title}</h2>`;
+    <h3>${chapter.title.trim()}</h3>`;
 
     text = chapter.data;
     if (text.replaceAll(" ",).replaceAll("\n", "") !== "") {
@@ -26,7 +26,11 @@ storyData.chapter_html.forEach(chapter => {
 
 });
 
-fs.writeFileSync(`${config.output.directory}/${storyData.title} by ${storyData.author}.html`, output);
+var htmlTemplate = fs.readFileSync("./bin/html_template.html")
+var $ = cheerio.load(htmlTemplate);
+
+$('body').html(output);
+fs.writeFileSync(`${config.output.directory}/${storyData.title} by ${storyData.author}.html`, $.html());
 }
 
 module.exports = {

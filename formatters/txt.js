@@ -2,7 +2,7 @@ const formatterName = "Text File"
 const formatterId = "txt"
 
 const cheerio = require('cheerio');
-const config = require('../config.json');
+const config = require('../bin/config.json');
 const fs = require('fs');
 
 const format = function(storyData) {
