@@ -28,7 +28,7 @@ fs.readdirSync("formatters").forEach(file => {
         if (paramFormatter == formatter.formatterId) {
             console.log(`INFO: Matched formatter with ${formatter.formatterName}`);
             formatterMatch = true;
-            selectedFormatter = formatter.formatterId
+            selectedFormatter = formatter
         }
     }
 });
@@ -41,7 +41,7 @@ Available Formatters:
 }
 
 
-fs.readdirSync("collectors").forEach(file => {
+fs.readdirSync("collectors").forEach(async file => {
     if (file != "template.txt") {
         
         var collector = require(`./collectors/${file}`);
@@ -49,8 +49,9 @@ fs.readdirSync("collectors").forEach(file => {
 
         if (url.match(collector.collectorRegex)) {
             console.log(`INFO: Matched url with ${collector.collectorName}`);
-            collector.process(url)
             collectorMatch = true;
+            var data = await collector.process(url);
+            selectedFormatter.format(data);
         }
     }
 });

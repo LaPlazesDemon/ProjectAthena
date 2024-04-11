@@ -11,10 +11,10 @@ const config = require('../config.json');
 
 var collectionProcess = async function(url) {
 
-    // Pull story id from URL
-    var storyID = collectorRegex.exec(url)[1]
-    console.debug(`DEBUG: Story ID: ${storyID}`);
-
+    // Setup Variables
+    var chapter_cheerio_data = [];
+    var chapter_text_data = [];
+    var chapter_html_data = [];
 
     // Download main page
     var response = await axios.request({
@@ -30,7 +30,7 @@ var collectionProcess = async function(url) {
     var title = $(`span.info > h2.title`).text().trim();
     var author = $(`span.info > span.author`).text().replace("by", "").trim();
 
-    // Grab all chapters
+    // Grab chapter list
     var chapterListElement = $('ul.table-of-contents');
     var chapterList = [];
     chapterListElement.children().each((ci, chapter) => {
@@ -41,31 +41,66 @@ var collectionProcess = async function(url) {
     });
     console.log("DEBUG: Found "+chapterList.length+" chapters")
 
-    promiseAllChapters(chapterList.map(chapter => chapter.link))
-    .then(chapters => {
-        chapters.forEach(chapter => {
-            $(`div#sp${storyID}-pg1 > div > pre`).children().each((pi, paragraph) => {
-                console.log($(paragraph).text())
-            });
+    // Retrieve all chapters
+    var responses = await promiseAllChapters(chapterList.map(chapter => chapter.link));
+
+    // Iterate through all of the chapters
+    responses.forEach(response => {
+
+        // Load webpage data into $
+        var chapterUrl = response.config.url;
+        var html = cheerio.load(response.data);
+
+        // Pull all paragraphs into one object
+        var storyID = collectorRegex.exec(chapterUrl)[1]
+        var paragraphs = html(`div#sp${storyID}-pg1 > div > pre`);
+
+        // Get Text and HTML data
+        var html_data = "";
+        var text_data = "";
+        $(paragraphs).children().each((index, child) => {
+            text_data += $(child).text()+"\n";
+            html_data += $(child).html().trim()+"<br>";
+        });
+
+        // Put chapter data in the global variable so that order is maintained
+        chapter_cheerio_data.push({
+            title: html(`header.panel h1.h2`).text(),
+            data: $(paragraphs)
+        });
+
+        chapter_text_data.push({
+            title: html(`header.panel h1.h2`).text(),
+            data: text_data
+        });
+
+        chapter_html_data.push({
+            title: html(`header.panel h1.h2`).text(),
+            data: html_data
         });
     });
 
+    return {
+        title: title,
+        author: author,
+        chapter_text: chapter_text_data,
+        chapter_html: chapter_html_data,
+        chapter_cheerio: chapter_cheerio_data
+    }
 }
 
 async function promiseAllChapters(chapterList) {
 
+    var promises = [];
+
     // Get all chapters asyncronously
-    var promises = chapterList.map(url =>
-        axios.request({
+    chapterList.forEach(url => {
+        promises.push(axios.request({
             method: "GET",
             url: url,
             headers: config.requests.headers
-        }).then(response => response.data)
-        .catch(error => {
-            console.error(`Error occurred while fetching data from ${url}:`, error);
-            throw error; 
-        })
-    );
+        }));
+    });
 
     return Promise.all(promises);
 }

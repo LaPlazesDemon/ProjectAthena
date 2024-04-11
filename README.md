@@ -3,7 +3,7 @@
 
 
 ### Supported Sites
-- None :)
+- Wattpad
 
 ### Supported Formats
 - txt [.txt]
@@ -38,8 +38,16 @@ var storyData = {
     title: "string",
     author: "string",
     tags?: "[string]",
-    chapterData: [Array [Cheerio Elements]]
+    chapter_text: string[],
+    chapter_html: string[],
+    chapter_cheerio: Cheerio Object[]
 }
 ```
+The `chapter_x` tags are the various outputs of the chapter data here are the formats:
 
-The `chapterData` tag is an array of every "chapter" or "part" of the story, in each array is another array of all of the Cheerio Elements. Some formats such as EPUB support direct HTML and CSS styling so the output can be stylized for use in those formats. I also just thing it's better in case images are included and you wish to import those into supported files
+`chapter_text` - An array of chapters where each chapter is a monolithic string containing all of the text with no formatting such a bold, italics, fonts etc. All stripped of HTML tags as well so no images or other data will be included
+
+`chapter_html` - An array of chapters where each chapter is a monolithic string containing all of the literal HTML data pulled from the site, this will include any \<div\>, \<span\>, \<img\> tags as well. 
+*Note: any \<script\> tags will be removed for obvious reasons*
+
+`chapter_cheerio` - An array of chapters where each chapter is a monolithic Cheerio object. In case you want to do any advanced data manipulation or something here you go! The cheerio object be the root element of the story so the lowest 

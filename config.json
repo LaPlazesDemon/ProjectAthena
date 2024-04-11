@@ -1,6 +1,6 @@
 {
     "output": {
-        "directory": "./downloads/"
+        "directory": "./downloads"
     },
     "requests": {
         "headers": {
