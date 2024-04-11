@@ -1,0 +1,20 @@
+var collectorName = "";
+var collectorRegex = ;
+
+///////////////
+// FUNCTIONS //
+///////////////
+
+var collectionProcess = function(url) {
+
+}
+
+/////////////
+// EXPORTS //
+/////////////
+
+module.exports = {
+    collectorName: collectorName,
+    collectorRegex, collectorRegex,
+    process: collectionProcess
+}
