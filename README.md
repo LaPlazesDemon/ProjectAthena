@@ -7,6 +7,7 @@
 
 ### Supported Formats
 - txt [.txt]
+- html [.html]
 
 ### Usage
 
