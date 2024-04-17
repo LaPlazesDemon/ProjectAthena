@@ -1,5 +1,5 @@
-const collectorName = "Wattpad";
-const collectorRegex = /^(?:https?:\/\/)?(?:www\.)?wattpad\.com\/(?:story\/)?(\d+)-.*$/i;
+var collectorName = "Wattpad";
+var collectorRegex = /^(?:https?:\/\/)?(?:www\.)?wattpad\.com\/(?:story\/)?(\d+)-.*$/i;
 
 const cheerio = require('cheerio');
 const axios = require('axios');
