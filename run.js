@@ -1,5 +1,7 @@
 var fs = require('fs');
 const { exit } = require('process');
+const { hideBin } = require('yargs/helpers')
+const yargs = require('yargs');
 
 var collectorMatch = false;
 var formatterMatch = false;
@@ -7,25 +9,44 @@ var formatterMatch = false;
 var collectorList = [];
 var formatterList = [];
 
-var url = process.argv[2];
-var paramFormatter = process.argv[3];
 var selectedFormatter;
 
-// Check if the right number of parameters were passed
-if (process.argv.length != 4) {
-    console.error(`ERROR: Bad number of parameters passed
-Usage: node run <url> <formatter>`);
-    exit(1);
-}
+// Get list of available formatters
+fs.readdirSync("formatters").forEach(file => {
+    if (file.endsWith(".js")) {
+        var formatter = require(`./formatters/${file}`);
+        formatterList.push(formatter.formatterId);
+    }
+});
 
+// Define Command Line Arguments
+const options = yargs
+  .usage('Usage: $0 [options]')
+  .option('url', {
+    describe: 'URL of the work',
+    type: 'string',
+    demandOption: true 
+  })
+  .option('formatter', {
+    describe: 'Which formatter to use',
+    type: 'string',
+    demandOption: true,
+    choices: formatterList
+  })
+  .option('no-TOC', {
+    describe: 'Disable creating a Table of Contents in the formatters that support them',
+    type: 'boolean',
+    default: false
+  })
+  .help()
+  .argv;
 
 // Check to see if the given formatter exists
 fs.readdirSync("formatters").forEach(file => {
-    if (file != "template.txt") {
+    if (file.endsWith(".js")) {
         var formatter = require(`./formatters/${file}`);
-        formatterList.push(`${formatter.formatterId} - ${formatter.formatterName}`)
 
-        if (paramFormatter == formatter.formatterId) {
+        if (options.formatter == formatter.formatterId) {
             console.log(`INFO: Matched formatter with ${formatter.formatterName}`);
             formatterMatch = true;
             selectedFormatter = formatter
@@ -33,30 +54,24 @@ fs.readdirSync("formatters").forEach(file => {
     }
 });
 
-if (!formatterMatch) {
-    console.error(`ERROR: Formatter ${paramFormatter} not found.
-Available Formatters: 
-    ${formatterList.join("\n  ")}`);
-    exit(2);
-}
 
-
+// Match the URL with the right collector
 fs.readdirSync("collectors").forEach(async file => {
-    if (file != "template.txt") {
+    if (file.endsWith(".js")) {
         
         var collector = require(`./collectors/${file}`);
         collectorList.push(collector.collectorName);
 
-        if (url.match(collector.collectorRegex)) {
+        if (options.url.match(collector.collectorRegex)) {
             console.log(`INFO: Matched url with ${collector.collectorName}`);
             collectorMatch = true;
-            var data = await collector.process(url);
+            var data = await collector.process(options.url);
             selectedFormatter.format(data);
         }
     }
 });
 
 if (!collectorMatch) {
-    console.error("ERROR: Count not find a matching collector for url "+process.argv[2])
+    console.error("ERROR: Count not find a matching collector for url "+options.url)
 }
 
