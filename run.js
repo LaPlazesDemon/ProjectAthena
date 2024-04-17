@@ -27,13 +27,13 @@ const options = yargs
     type: 'string',
     demandOption: true 
   })
-  .option('formatter', {
+  .option('format', {
     describe: 'Which formatter to use',
     type: 'string',
     demandOption: true,
     choices: formatterList
   })
-  .option('no-TOC', {
+  .option('no-toc', {
     describe: 'Disable creating a Table of Contents in the formatters that support them',
     type: 'boolean',
     default: false
