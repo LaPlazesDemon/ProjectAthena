@@ -5,7 +5,7 @@ const cheerio = require('cheerio');
 const config = require('../bin/config.json');
 const fs = require('fs');
 
-const format = function(storyData) {
+const format = function(storyData, options) {
 
     var output = `
 Title: ${storyData.title}
