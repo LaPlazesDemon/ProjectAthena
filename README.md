@@ -4,6 +4,7 @@
 
 ### Supported Sites
 - Wattpad
+- Quotev
 
 ### Supported Formats
 - txt [.txt]
@@ -13,7 +14,11 @@
 
 Modify the `config.json` file to change the output directory 
 ```bash
-node run <url> <output format>
+node run --url <url> --format <format>
+```
+Optional Arguments
+```bash
+--no-toc - Disables generating Table of Contents
 ```
 
 ### Adding formatters
