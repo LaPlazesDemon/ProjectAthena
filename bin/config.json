@@ -5,6 +5,24 @@
     "requests": {
         "headers": {
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36"
+        },
+        "quotev_headers": {
+            "Pragma": "no-cache",
+            "Accept": "*/*",
+            "Sec-Fetch-Site": "same-origin",
+            "Accept-Language": "en-US,en;q=0.9",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Sec-Fetch-Mode": "cors",
+            "Host": "www.quotev.com",
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.2.1 Safari/605.1.15",
+            "Referer": "https://www.quotev.com/story/7504266/Facade",
+            "Connection": "keep-alive",
+            "Sec-Fetch-Dest": "empty",
+            "Cookie": "sl=",
+            "X-Json": 1,
+            "X-Ajax": 1,
+            "Priority": "u=3, i",
+            "X-Ajax-Page": 1
         }
     }
 }
