@@ -10,7 +10,8 @@ const format = function(storyData) {
     var output = `
 <h1>${storyData.title}</h1>
 <h3>By: ${storyData.author}</h3>
-${(function(){if (storyData.tags != undefined) {return `Tags: ${storyData.tags.join(", ")}`} else {return ""}})()}
+${(function(){if (storyData.tags != undefined) {return `Tags: ${storyData.tags.join(", ")}<br>`} else {return ""}})()}
+${(function(){if (storyData.introduction != undefined) {return `<h3>Introduction</h3><p>${storyData.introduction}</p>`} else {return ""}})()}
 `;
 
 storyData.chapter_html.forEach(chapter => {

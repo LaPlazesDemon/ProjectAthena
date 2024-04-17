@@ -38,6 +38,7 @@ const format = function(storyData);
 var storyData = {
     title: "string",
     author: "string",
+    introduction?: "string",
     tags?: "[string]",
     chapter_text: string[],
     chapter_html: string[],
